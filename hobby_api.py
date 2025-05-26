@@ -20,6 +20,10 @@ if all(feature in x.columns for feature in categorical_features):
 api = Flask(__name__)
 CORS(api)
 
+@api.route("/", methods=["GET", "HEAD", "POST"])
+def index():
+    return "Hobby Prediction API is running", 200
+
 @api.route('/api/hobby_prediction', methods=['POST'])
 def prediction_hobby():
     # get the request data from the client
@@ -51,4 +55,4 @@ def prediction_hobby():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
-    api.run(host="0.0.0.0", port=port)
+    api.run(host="0.0.0.0", port=port , debug=True)
